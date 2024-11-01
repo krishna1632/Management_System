@@ -8,7 +8,7 @@
             <div class="card p-2">
                 <div class="card-body">
                     <h3 class="h2 mb-4">Edit PYQ</h3>
-                    <form action="{{ route('admin.upload_pyq.update', $pyq->id) }}" method="POST"
+                    <form action="#" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

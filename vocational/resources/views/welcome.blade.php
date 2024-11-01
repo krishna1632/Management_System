@@ -55,49 +55,56 @@
                         <div class="d-flex justify-content-center ">
                             <img class="m-4" style="height:100px" src="/assets/image/Ramanujan_College_Logo.jpg" alt="">
                         </div>
-                        <form method="POST" action="{{ route('login') }}" class="b">
-    @csrf
+                        <form method="POST" action="{{ route('login') }}" class=" b">
+                            @csrf
 
-    <!-- Error Message -->
-   
+                            <!-- Email Address -->
+                            <div>
+                                <x-input-label for="email" :value="('Email ')" class="form-label text-primary "/>
+                                <x-text-input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username"  placeholder="Enter register email"
+                                autocomplete="off"/>
+                               
+                               
+                            </div>
 
-    <!-- Email Address -->
-    <div>
-        <x-input-label for="email" :value="__('Email ')" class="form-label text-primary" />
-        <x-text-input id="email" class="form-control" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" placeholder="Enter Register email" autocomplete="off" />
-        @if ($errors->has('email'))
-            <div class="text-danger fw-bold mb-3">
-                {{ __('These credentials do not match our records.') }}
-            </div>
-        @endif
-    </div>
+                            <!-- Password -->
+                            <div class="mt-4">
+                                <x-input-label for="password" :value="('Password')" class="form-label text-primary" />
 
-    <!-- Password -->
-    <div class="mt-4">
-        <x-input-label for="password" :value="__('Password')" class="form-label text-primary" />
-        <x-text-input id="password" class="form-control" type="password" name="password" required autocomplete="current-password" placeholder="Enter password" />
-        <x-input-error :messages="$errors->get('password')" class="mt-2" />
-    </div>
+                                <x-text-input id="password" class="form-control"
+                                                type="password"
+                                                name="password"
+                                                required autocomplete="current-password"
+                                                 />
 
-    <!-- Remember Me -->
-    <div class="block mt-4">
-        <label for="remember_me" class="inline-flex items-center">
-            <input id="remember_me" type="checkbox" class="rounded dark:bg-indigo-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-            <span class="ms-2 text-sm text-indigo-600 dark:text-indigo-600">{{ __('Remember me') }}</span>
-        </label>
-    </div>
+                                 @if ($errors->has('email'))
+                                    <div class="text-danger fw-bold mb-3">
+                                        {{ __('These credentials do not match our records.') }}
+                                    </div>
+                                 @endif
+                            </div>
 
-    <div class="d-flex align-items-center justify-content-between mt-4 mb-3">
-        <button type="submit" class="btn btn-primary px-4 mb-2 fw-bold">Login</button>
+                            <!-- Remember Me -->
+                            <div class="block mt-4">
+                                <label for="remember_me" class="inline-flex items-center">
+                                    <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
+                                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
+                                </label>
+                            </div>
 
-        @if (Route::has('password.request'))
-            <a class="text-danger" href="{{ route('password.request') }}">
-                {{ __('Forgot your password?') }}
-            </a>
-        @endif
-    </div>
-</form>
+                            <div class="d-flex align-items-center justify-content-between mt-4 mb-3">
+                                
 
+                            <button type="submit" class="btn btn-primary px-4 mb-2 fw-bold">Login</button>
+
+
+                            @if (Route::has('password.request'))
+                                    <a class="text-danger" href="{{ route('password.request') }}">
+                                        {{ __('Forgot your password?') }}
+                                    </a>
+                                @endif
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

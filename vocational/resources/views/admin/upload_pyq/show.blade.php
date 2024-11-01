@@ -38,9 +38,9 @@
                     {{-- Back, Edit, Delete buttons --}}
                     <div class="d-flex justify-content-between mt-3">
                         <a href="{{ route('admin.upload_pyq.index') }}" class="btn btn-light px-4">Back to List</a>
-                        <a href="{{ route('admin.upload_pyq.edit', $pyq->id) }}" class="btn btn-warning">Edit</a>
+                        <a href="#" class="btn btn-warning">Edit</a>
 
-                        <form action="{{ route('admin.upload_pyq.destroy', $pyq->id) }}" method="POST"
+                        <form action="#" method="POST"
                             style="display:inline-block;">
                             @csrf
                             @method('DELETE')
