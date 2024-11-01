@@ -9,5 +9,5 @@ class StudyMaterial extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['image_path', 'title', 'description', 'file_path'];
+    protected $fillable = ['department', 'semester', 'image_path', 'title', 'description', 'file_path'];
 }

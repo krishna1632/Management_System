@@ -19,6 +19,9 @@
             <table id="datatablesSimple" class="table table-striped">
                 <thead>
                     <tr>
+                        <th>Department</th>
+                        <th>Semester</th>
+                        <th>Subject Type</th>
                         <th>Subject</th>
                         <th>Year</th>
                         <th>File</th>
@@ -28,6 +31,9 @@
                 <tbody>
                     @foreach ($pyq as $material)
                         <tr>
+                            <td>{{ $material->department }}</td>
+                            <td>{{ $material->semester }}</td>
+                            <td>{{ $material->subject_type }}</td>
                             <td>{{ $material->title }}</td>
                             <td>{{ $material->year }}</td>
                             <td>

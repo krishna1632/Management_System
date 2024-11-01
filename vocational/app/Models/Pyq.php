@@ -9,6 +9,6 @@ class Pyq extends Model
 {
     use HasFactory;
     protected $table = 'pyq';
-    protected $fillable = ['title', 'year', 'file'];
+    protected $fillable = ['department', 'semester', 'subject_type', 'title', 'year', 'file'];
 
 }

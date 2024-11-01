@@ -49,6 +49,8 @@ class StudyMaterialController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5120', // Image validation (max 5 MB)
+            'department' => 'required|string|max:255',
+            'semester' => 'required|string|max:255',
             'description' => 'nullable|string',
             'file' => 'required|file|mimes:pdf,doc,docx|max:5120', // File validation
         ]);
@@ -60,6 +62,8 @@ class StudyMaterialController extends Controller
         StudyMaterial::create([
             'title' => $request->title,
             'image_path' => $imagePath, // Save image path
+            'department' => $request->department,
+            'semester' => $request->semester,
             'file_path' => $filePath, // Save file path
             'description' => $request->description, // Store description
             'is_visible' => true, // For visibility, set it true by default
@@ -92,12 +96,16 @@ class StudyMaterialController extends Controller
         $request->validate([
             'title' => 'nullable|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
+            'department' => 'required|string|max:255',
+            'semester' => 'required|string|max:255',
             'description' => 'nullable|string',
             'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048', // File validation
         ]);
 
         // Find the study material
         $studyMaterial->title = $request->title;
+        $studyMaterial->department = $request->department;
+        $studyMaterial->semester = $request->semester;
         $studyMaterial->description = $request->description;
 
         // Handle image upload
@@ -149,7 +157,4 @@ class StudyMaterialController extends Controller
 
         return redirect()->route('admin.study_materials.index')->with('success', 'Study material deleted successfully.');
     }
-
-
-
 }

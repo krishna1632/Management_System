@@ -14,6 +14,59 @@
                         @method('PUT')
 
                         <div class="row">
+                            <!-- Department Dropdown -->
+                            <div class="col-md-3">
+                                <label class="form-label">Department</label>
+                                <select name="department" class="form-control">
+                                    <option value="" disabled>Select Department</option>
+
+                                    <option value="Computer Science"
+                                        {{ old('department', $studyMaterial->department) == 'Computer Science' ? 'selected' : '' }}>
+                                        Computer Science
+                                    </option>
+
+                                    <option value="BMS"
+                                        {{ old('department', $studyMaterial->department) == 'BMS' ? 'selected' : '' }}>
+                                        BMS
+
+                                    </option>
+                                    <option value="Commerce"
+                                        {{ old('department', $studyMaterial->department) == 'Commerce' ? 'selected' : '' }}>
+                                        Commerce
+                                    </option>
+
+                                    <option value="Bvoc Software Development"
+                                        {{ old('department', $studyMaterial->department) == 'Bvoc Software Development' ? 'selected' : '' }}>
+                                        Bvoc Software Development
+                                    </option>
+
+                                    <option value="Banking"
+                                        {{ old('department', $studyMaterial->department) == 'Banking' ? 'selected' : '' }}>
+                                        Banking
+                                    </option>
+                                </select>
+                                @error('department')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <!-- Semester Dropdown -->
+                            <div class="col-md-3">
+                                <label class="form-label">Semester</label>
+                                <select name="semester" class="form-control">
+                                    <option value="" disabled>Select Semester</option>
+                                    @for ($i = 1; $i <= 8; $i++)
+                                        <option value="{{ $i }}"
+                                            {{ old('semester', $studyMaterial->semester) == $i ? 'selected' : '' }}>
+                                            {{ $i }}</option>
+                                    @endfor
+                                </select>
+                                @error('semester')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <!-- Title Field -->
                             <div class="col-md-3">
                                 <label class="form-label">Title</label>
                                 <input type="text" name="title" class="form-control" placeholder="Enter Title"
@@ -23,6 +76,7 @@
                                 @enderror
                             </div>
 
+                            <!-- Description Field -->
                             <div class="col-md-3">
                                 <label class="form-label">Description</label>
                                 <textarea name="description" class="form-control" placeholder="Enter Description">{{ old('description', $studyMaterial->description) }}</textarea>
@@ -31,6 +85,7 @@
                                 @enderror
                             </div>
 
+                            <!-- Image Field -->
                             <div class="col-md-3">
                                 <label class="form-label">Image</label>
                                 <input type="file" name="image" class="form-control">
@@ -43,6 +98,7 @@
                                 @enderror
                             </div>
 
+                            <!-- File Field -->
                             <div class="col-md-3">
                                 <label class="form-label">File</label>
                                 <input type="file" name="file" class="form-control-file">
@@ -77,12 +133,11 @@
                     icon: 'success',
                     title: 'Success!',
                     text: "{{ session('success') }}",
-                    showConfirmButton: false, // Hide the OK button
-                    timer: 3000, // Popup will disappear after 4 seconds
-                    timerProgressBar: true, // Optional: Show progress bar
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
                 });
             }
         </script>
     @endif
-
 @endsection

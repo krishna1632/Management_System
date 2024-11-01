@@ -13,12 +13,15 @@
         <div class="card-header">
             <i class="fas fa-book me-1"></i>
             Study Materials List
-            <a href="{{ route('admin.study_materials.create') }}" class="btn btn-primary btn-sm float-end">Add New Study Material</a>
+            <a href="{{ route('admin.study_materials.create') }}" class="btn btn-primary btn-sm float-end">Add New Study
+                Material</a>
         </div>
         <div class="card-body">
             <table id="datatablesSimple" class="table table-striped">
                 <thead>
                     <tr>
+                        <th>Department</th>
+                        <th>Semester</th>
                         <th>Image</th>
                         <th>Title</th>
                         <th>Description</th>
@@ -27,11 +30,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($studyMaterials as $material)
+                    @foreach ($studyMaterials as $material)
                         <tr>
+                            <td>{{ $material->department }}</td>
+                            <td>{{ $material->semester }}</td>
                             <td>
                                 @if ($material->image_path)
-                                    <img src="{{ asset('storage/' . $material->image_path) }}" alt="Image" width="100">
+                                    <img src="{{ asset('storage/' . $material->image_path) }}" alt="Image"
+                                        width="100">
                                 @else
                                     No Image
                                 @endif
@@ -48,12 +54,16 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('admin.study_materials.show', $material->id) }}" class="btn btn-info btn-sm">View</a>
-                                <a href="{{ route('admin.study_materials.edit', $material->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('admin.study_materials.destroy', $material->id) }}" method="POST" style="display:inline;">
+                                <a href="{{ route('admin.study_materials.show', $material->id) }}"
+                                    class="btn btn-info btn-sm">View</a>
+                                <a href="{{ route('admin.study_materials.edit', $material->id) }}"
+                                    class="btn btn-warning btn-sm">Edit</a>
+                                <form action="{{ route('admin.study_materials.destroy', $material->id) }}" method="POST"
+                                    style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this study material?')">Delete</button>
+                                    <button type="submit" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Are you sure you want to delete this study material?')">Delete</button>
                                 </form>
                             </td>
                         </tr>
@@ -67,7 +77,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- SweetAlert Success Popup -->
-    @if(session('success'))
+    @if (session('success'))
         <script>
             window.onload = function() {
                 Swal.fire({

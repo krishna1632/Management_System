@@ -33,6 +33,9 @@ class PyqController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'department' => 'required|string|max:255',
+            'semester' => 'required|string|max:255',
+            'subject_type' => 'required|string|max:255',
             'title' => 'required|string|max:255',
             'year' => 'nullable|string|max:255',
             'file' => 'required|file|mimes:pdf,doc,docx|max:5120', // File validation
@@ -42,6 +45,9 @@ class PyqController extends Controller
 
         // Create a new study material entry
         Pyq::create([
+            'department' => $request->department,
+            'semester' => $request->semester,
+            'subject_type' => $request->subject_type,
             'title' => $request->title,
             'year' => $request->year, // Store year
             'file' => $file, // Save file path
@@ -74,12 +80,18 @@ class PyqController extends Controller
     public function update(Request $request, Pyq $pyq)
     {
         $request->validate([
+            'department' => 'nullable|string|max:255',
+            'semester' => 'nullable|string|max:255',
+            'subject_type' => 'nullable|string|max:255',
             'title' => 'nullable|string|max:255',
             'year' => 'nullable|string',
             'file' => 'nullable|file|mimes:pdf,doc,docx|max:2048', // File validation
         ]);
 
         // Find the pyq
+        $pyq->department = $request->department;
+        $pyq->semester = $request->semester;
+        $pyq->subject_type = $request->subject_type;
         $pyq->title = $request->title;
         $pyq->year = $request->year;
 

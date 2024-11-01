@@ -8,12 +8,78 @@
             <div class="card p-2">
                 <div class="card-body">
                     <h3 class="h2 mb-4">Edit PYQ</h3>
-                    <form action="#" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('admin.upload_pyq.update', $id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
                         <div class="row">
+                            <!-- Department Dropdown -->
+                            <div class="col-md-3">
+                                <label class="form-label">Department</label>
+                                <select name="department" class="form-control">
+                                    <option value="" disabled>Select Department</option>
+
+                                    <option value="Computer Science"
+                                        {{ old('department', $pyq->department) == 'Computer Science' ? 'selected' : '' }}>
+                                        Computer Science
+                                    </option>
+
+                                    <option value="BMS"
+                                        {{ old('department', $pyq->department) == 'BMS' ? 'selected' : '' }}>
+                                        BMS
+
+                                    </option>
+                                    <option value="Commerce"
+                                        {{ old('department', $pyq->department) == 'Commerce' ? 'selected' : '' }}>
+                                        Commerce
+                                    </option>
+
+                                    <option value="Bvoc Software Development"
+                                        {{ old('department', $pyq->department) == 'Bvoc Software Development' ? 'selected' : '' }}>
+                                        Bvoc Software Development
+                                    </option>
+
+                                    <option value="Banking"
+                                        {{ old('department', $pyq->department) == 'Banking' ? 'selected' : '' }}>
+                                        Banking
+                                    </option>
+                                </select>
+                                @error('department')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <!-- Semester Dropdown -->
+                            <div class="col-md-3">
+                                <label class="form-label">Semester</label>
+                                <select name="semester" class="form-control">
+                                    <option value="" disabled>Select Semester</option>
+                                    @for ($i = 1; $i <= 8; $i++)
+                                        <option value="{{ $i }}"
+                                            {{ old('semester', $pyq->semester) == $i ? 'selected' : '' }}>
+                                            {{ $i }}</option>
+                                    @endfor
+                                </select>
+                                @error('semester')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-3">
+                                <label class="form-label">Subject Type</label>
+                                <select name="subject_type" class="form-control">
+                                    <option value="" disabled>Select Subject Type</option>
+                                    <option value="core"
+                                        {{ old('subject_type', $pyq->subject_type) == 'Core' ? 'selected' : '' }}>
+                                        Core
+                                    </option>
+                                    <option value="Elective"
+                                        {{ old('subject_type', $pyq->subject_type) == 'Elective' ? 'selected' : '' }}>
+                                        Elective
+                                    </option>
+                                </select>
+                            </div>
+
                             <div class="col-md-3">
                                 <label class="form-label">Title</label>
                                 <input type="text" name="title" class="form-control" placeholder="Enter Title"
