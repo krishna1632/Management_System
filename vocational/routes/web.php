@@ -23,8 +23,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::middleware(['auth', 'userMiddleware'])->group(function () {
-    Route::get('/user/dashboard', [UserController::class, 'index'])->name('dashboard');
+Route::middleware(['auth', 'userMiddleware'])->prefix('user')->as('user.')->group(function () {
+    Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
 });
 
 Route::middleware(['auth', 'adminMiddleware'])->prefix('admin')->as('admin.')->group(function () {
@@ -32,13 +32,13 @@ Route::middleware(['auth', 'adminMiddleware'])->prefix('admin')->as('admin.')->g
     Route::resource('/faculty', FacultyController::class);
     Route::resource('/study_materials', StudyMaterialController::class);
     Route::resource('/upload_pyq', PyqController::class);
-    
+
     // Route::get('/upload_pyq', [PyqController::class, 'index'])->name('upload_pyq.index');
     // Route::get('/upload_pyq/create', [PyqController::class, 'create'])->name('upload_pyq.create');
     // Route::post('/upload_pyq', [PyqController::class, 'store'])->name('upload_pyq.store');
     // Route::get('/upload_pyq/{upload_pyq}', [PyqController::class, 'show'])->name('admin.upload_pyq.show');
     // Route::get('/upload_pyq/{upload_pyq}/edit', [PyqController::class, 'edit'])->name('upload_pyq.edit');
-    // Route::put('/upload_pyq/{upload_pyq}', [PyqController::class, 'update'])->name('upload_pyq.update');
+    Route::put('/upload_pyq/{upload_pyq}', [PyqController::class, 'update'])->name('upload_pyq.update');
     // Route::delete('/upload_pyq/{upload_pyq}', [PyqController::class, 'destroy'])->name('upload_pyq.destroy');
 });
 

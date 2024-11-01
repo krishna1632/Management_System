@@ -18,6 +18,7 @@ class UserController extends Controller
     {
         // Get the authenticated user
         $user = Auth::user();
+        // dd($user);
 
         // Pass the user data to the view
         return view('user.dashboard', compact('user'));
