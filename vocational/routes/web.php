@@ -37,7 +37,7 @@ Route::middleware(['auth', 'adminMiddleware'])->prefix('admin')->as('admin.')->g
     // Route::get('/upload_pyq/create', [PyqController::class, 'create'])->name('upload_pyq.create');
     // Route::post('/upload_pyq', [PyqController::class, 'store'])->name('upload_pyq.store');
     // Route::get('/upload_pyq/{upload_pyq}', [PyqController::class, 'show'])->name('admin.upload_pyq.show');
-    // Route::get('/upload_pyq/{upload_pyq}/edit', [PyqController::class, 'edit'])->name('upload_pyq.edit');
+    Route::get('/upload_pyq/{upload_pyq}/edit', [PyqController::class, 'edit'])->name('upload_pyq.edit');
     Route::put('/upload_pyq/{upload_pyq}', [PyqController::class, 'update'])->name('upload_pyq.update');
     // Route::delete('/upload_pyq/{upload_pyq}', [PyqController::class, 'destroy'])->name('upload_pyq.destroy');
 });
