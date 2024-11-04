@@ -14,8 +14,14 @@
                 <div class="card-body">
                     <!-- Profile Picture -->
                     <img src="{{ asset($user->profilePic) }}" alt="Profile Picture" class="rounded-circle" width="150" height="150">
-                    <h3 class="mt-3">{{ $user->name }}</h3>
-                    <p>{{ $user->department }}</p>
+                    <h3 class="mt-3 text-primary">{{ $user->name }}</h3>
+                    <hr>
+                    <div class="mt-4">
+                        <p><strong>College:</strong> Ramanujan College</p>
+                        <hr>
+                        <p><strong>Department:</strong> {{ $user->department }}</p>
+                       
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,42 +81,56 @@
             <!-- Change Password Form (Hidden initially) -->
             <div id="passwordForm" class="card mt-4" style="display: none;">
                 <div class="card-header">
-                    Change Password
+                    <h2 class="text-lg font-medium text-gray-900">Change Password</h2>
                 </div>
                 <div class="card-body">
-                    <form action="#" method="POST">
+                    <p class="mt-1 text-sm text-gray-600">Ensure your account is using a long, random password to stay secure.</p>
+                    
+                    <form id="updatePasswordForm" method="post" action="{{ route('password.update') }}" class="mt-4">
                         @csrf
                         @method('PUT')
 
                         <!-- Current Password -->
                         <div class="row mb-3">
-                            <label for="currentPassword" class="col-sm-4 col-form-label">Current Password</label>
+                            <label for="update_password_current_password" class="col-sm-4 col-form-label">{{ __('Current Password') }}</label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control" name="currentPassword" id="currentPassword" required>
+                                <x-text-input id="update_password_current_password" name="current_password" type="password" class="form-control" required autocomplete="current-password" />
+                                <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
                             </div>
                         </div>
 
                         <!-- New Password -->
                         <div class="row mb-3">
-                            <label for="newPassword" class="col-sm-4 col-form-label">New Password</label>
+                            <label for="update_password_password" class="col-sm-4 col-form-label">{{ __('New Password') }}</label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control" name="newPassword" id="newPassword" required>
+                                <x-text-input id="update_password_password" name="password" type="password" class="form-control" required autocomplete="new-password" />
+                                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
                             </div>
                         </div>
 
                         <!-- Confirm New Password -->
                         <div class="row mb-3">
-                            <label for="confirmNewPassword" class="col-sm-4 col-form-label">Confirm New Password</label>
+                            <label for="update_password_password_confirmation" class="col-sm-4 col-form-label">{{ __('Confirm Password') }}</label>
                             <div class="col-sm-8">
-                                <input type="password" class="form-control" name="confirmNewPassword" id="confirmNewPassword" required>
+                                <x-text-input id="update_password_password_confirmation" name="password_confirmation" type="password" class="form-control" required autocomplete="new-password" />
+                                <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
                             </div>
                         </div>
 
                         <!-- Update Password Button -->
-                        <button type="submit" class="btn btn-success">Update Password</button>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-success">{{ __('Update Password') }}</button>
+                        </div>
+
+                        @if (session('status') === 'password-updated')
+                            <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-gray-600 mt-3">
+                                {{ __('Saved.') }}
+                            </p>
+                        @endif
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -140,12 +160,56 @@
         </script>
     @endif
 
+    <!-- SweetAlert Error Popup for Password Update -->
+    @if ($errors->updatePassword->any())
+        <script>
+            window.onload = function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Password Update Failed!',
+                    text: "{{ $errors->updatePassword->first() }}",
+                    showConfirmButton: true,
+                    width: '600px',
+                    padding: '3em',
+                    backdrop: `rgba(0,0,0,0.4)`,
+                    position: 'center',
+                    customClass: {
+                        popup: 'my-swal-popup'
+                    }
+                });
+            }
+        </script>
+    @endif
+
     <!-- JavaScript to toggle the Change Password form -->
     <script>
         function togglePasswordForm() {
             const passwordForm = document.getElementById('passwordForm');
             passwordForm.style.display = passwordForm.style.display === 'none' ? 'block' : 'none';
         }
+
+        // Success popup for password update
+        @if (session('status') === 'password-updated')
+            window.onload = function() {
+                const passwordForm = document.getElementById('passwordForm');
+                passwordForm.style.display = 'none'; // Hide the password form
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Your password has been updated successfully.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    width: '600px',
+                    padding: '3em',
+                    backdrop: `rgba(0,0,0,0.4)`,
+                    position: 'center',
+                    customClass: {
+                        popup: 'my-swal-popup'
+                    }
+                });
+            }
+        @endif
     </script>
 
     <!-- CSS to further ensure the popup centers correctly -->
