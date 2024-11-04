@@ -1,4 +1,9 @@
 <x-guest-layout>
+    <!-- Custom Logo -->
+    <div class="flex justify-center">
+        <img class="m-4" style="height:100px" src="/assets/image/Ramanujan_College_Logo.jpg" alt="Ramanujan College Logo">
+    </div>
+
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
     </div>
