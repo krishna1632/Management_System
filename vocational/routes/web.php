@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\StudyMaterialController;
 use App\Http\Controllers\Admin\PyqController;
+use App\Http\Controllers\Admin\SyllabusController;
 // use App\Http\Controllers\Admin\EventController;
 
 Route::get('/', function () {
@@ -32,14 +33,16 @@ Route::middleware(['auth', 'adminMiddleware'])->prefix('admin')->as('admin.')->g
     Route::resource('/faculty', FacultyController::class);
     Route::resource('/study_materials', StudyMaterialController::class);
     Route::resource('/upload_pyq', PyqController::class);
+    Route::resource('/syllabus', SyllabusController::class);
 
     // Route::get('/upload_pyq', [PyqController::class, 'index'])->name('upload_pyq.index');
     // Route::get('/upload_pyq/create', [PyqController::class, 'create'])->name('upload_pyq.create');
     // Route::post('/upload_pyq', [PyqController::class, 'store'])->name('upload_pyq.store');
     // Route::get('/upload_pyq/{upload_pyq}', [PyqController::class, 'show'])->name('admin.upload_pyq.show');
-    Route::get('/upload_pyq/{upload_pyq}/edit', [PyqController::class, 'edit'])->name('upload_pyq.edit');
-    Route::put('/upload_pyq/{upload_pyq}', [PyqController::class, 'update'])->name('upload_pyq.update');
+    // Route::get('/upload_pyq/{upload_pyq}/edit', [PyqController::class, 'edit'])->name('upload_pyq.edit');
+    // Route::put('/upload_pyq/{upload_pyq}', [PyqController::class, 'update'])->name('upload_pyq.update');
     // Route::delete('/upload_pyq/{upload_pyq}', [PyqController::class, 'destroy'])->name('upload_pyq.destroy');
+
 });
 
 

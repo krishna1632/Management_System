@@ -103,9 +103,9 @@ class PyqController extends Controller
             }
 
             // Upload the new file
-            $fileName = time() . '_' . $request->file->getClientOriginalName();
-            $request->file->storeAs('public/upload_pyq', $fileName); // Store in storage/app/public/upload_pyq
-            $pyq->file = 'study_materials/' . $fileName; // Save relative path for public access
+            $file = time() . '_' . $request->file->getClientOriginalName();
+            $request->file->storeAs('public/upload_pyq', $file); // Store in storage/app/public/upload_pyq
+            $pyq->file = 'pyq/' . $file; // Save relative path for public access
         }
 
         $pyq->save();

@@ -26,7 +26,7 @@
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 RoadMaps
             </a>
-            <a class="nav-link" href="{{ url('#') }}">
+            <a class="nav-link" href="{{ url('admin/syllabus') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Syllabus
             </a>
